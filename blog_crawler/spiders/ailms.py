@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 # coding=utf-8
-import scrapy
-from scrapy.http.request import Request
 import time
+
+import scrapy
 
 from blog_crawler import utils
 from blog_crawler.items import BlogCrawlerItem
@@ -30,10 +30,11 @@ class AilmsSpider(scrapy.Spider):
             item["blog_time"] = utils.str_from_xpath(article_selector, 'header/div/span[@class="date"]//text()')
             item["category"] = utils.set_from_xpath(article_selector,
                                                     'header/div/span[@class="categories-links"]/a//text()')
-            item["tag"] = utils.set_from_xpath(article_selector, 'header/div/span[@class="categories-links"]/a//text()')
+            item["tag"] = utils.set_from_xpath(article_selector, 'header/div/span[@class="tags-links"]/a//text()')
             item["content"] = utils.str_from_xpath(article_selector, 'div[@class="entry-content"]//text()')
             item["crawl_time"] = utils.standard_time(int(time.time()))
             yield item
 
         next_page_url = utils.str_from_xpath(response, '//div[@class="nav-previous"]/a/@href')
-        yield self.make_requests_from_url(next_page_url)
+        if next_page_url:
+            yield self.make_requests_from_url(next_page_url)

@@ -19,4 +19,4 @@ def set_from_xpath(selector, xpath):
 
 
 def standard_time(ts):
-    datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S')
+    return datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S')

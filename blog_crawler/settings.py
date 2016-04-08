@@ -85,3 +85,6 @@ ITEM_PIPELINES = {
 #HTTPCACHE_STORAGE='scrapy.extensions.httpcache.FilesystemCacheStorage'
 
 HTTP_PROXY = "http://127.0.0.1:8118"
+
+MONGO_URI = "mongodb://192.168.1.230:27017"
+MONGO_DB = "crawl"
